@@ -1,0 +1,33 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import "components/Radio_i_pradio_radio/Radio_i_pradio_radio.camkes";
+import "components/Receiver_i_preceiver_receiver/Receiver_i_preceiver_receiver.camkes";
+import "components/Filter_Impl_Filter_Filter/Filter_Impl_Filter_Filter.camkes";
+
+assembly {
+  composition {
+    component Radio_i_pradio_radio pradio_radio;
+    component Receiver_i_preceiver_receiver preceiver_receiver;
+    component Filter_Impl_Filter_Filter Filter_Filter;
+
+    connection seL4Notification conn1(from pradio_radio.sb_write_port_1_notification, to Filter_Filter.sb_Input_notification);
+    connection seL4SharedData conn2(from pradio_radio.sb_write_port_queue_1, to Filter_Filter.sb_Input_queue);
+    connection seL4Notification conn3(from Filter_Filter.sb_Output_1_notification, to preceiver_receiver.sb_read_port_notification);
+    connection seL4SharedData conn4(from Filter_Filter.sb_Output_queue_1, to preceiver_receiver.sb_read_port_queue);
+    connection seL4Notification conn5(from pradio_radio.sb_self_pacer_tick, to pradio_radio.sb_self_pacer_tock);
+    connection seL4Notification conn6(from Filter_Filter.sb_self_pacer_tick, to Filter_Filter.sb_self_pacer_tock);
+  }
+
+  configuration {
+    pradio_radio._domain = 2;
+    preceiver_receiver._domain = 4;
+    Filter_Filter._domain = 3;
+    conn2.size = 4096;
+    pradio_radio.sb_write_port_queue_1_access = "W";
+    Filter_Filter.sb_Input_queue_access = "R";
+    conn4.size = 4096;
+    Filter_Filter.sb_Output_queue_1_access = "W";
+    preceiver_receiver.sb_read_port_queue_access = "R";
+  }
+}

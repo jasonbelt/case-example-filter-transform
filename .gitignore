@@ -1,0 +1,3 @@
+/.aadlbin-gen/
+*.S
+**/slang_libraries

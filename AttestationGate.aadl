@@ -1,0 +1,136 @@
+package AttestationGate
+public
+	with Data_Types;
+	with Case_Scheduling;
+	with Case_Properties;
+	with HAMR;
+	renames AGREE_Definitions::all;
+
+	thread Filter
+		features
+			Input: in event data port Data_Types::Temp.i;
+			Output: out event data port Data_Types::Temp.i;
+		properties
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+		annex agree {**
+			guarantee Filter_Output "The filter output shall be well-formed" :
+			if event(Input) and Good_Message(Input) then
+			event(Output) and Output = Input
+			else
+			not event(Output);
+		**};
+	end Filter;
+
+	thread implementation Filter.Impl
+	properties
+		Dispatch_Protocol => Periodic;
+		Period => 1 sec;
+
+		CASE_Properties::Component_Language => CakeML;
+		Source_Text => ("Component_Source/AttestationGate_Filter/AttestationGate_Filter.S",
+			"Component_Source/AttestationGate_Filter/basis_ffi.c");
+end Filter.Impl;
+
+	process Filter_seL4
+		features
+			Input: in event data port Data_Types::Temp.i;
+			Output: out event data port Data_Types::Temp.i;
+		properties
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+	end Filter_seL4;
+
+	process implementation Filter_seL4.Impl
+		subcomponents
+			Filter: thread Filter.Impl;
+		connections
+			c1: port Filter.Output -> Output;
+			c2: port Input -> Filter.Input;
+		properties
+			Period => 1 sec;
+			CASE_Scheduling::Domain => 3;
+		annex agree {**
+			lift contract;
+		**};
+	end Filter_seL4.Impl;
+
+	system s
+	end s;
+
+	system implementation s.impl
+		subcomponents
+			proc: processor proc;
+
+			pradio: process pradio.i;
+			preceiver: process preceiver.i;
+
+			Filter: process Filter_seL4.Impl;
+		connections
+			c1: port pradio.write_port -> Filter.Input;
+
+			c2: port Filter.Output -> preceiver.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to pradio, preceiver, Filter;
+			HAMR::Bit_Codec_Raw_Connections => true;
+	end s.impl;
+
+	processor proc
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+	end proc;
+
+	----------------------------------------------------------------------------------------
+	process pradio
+		features
+			write_port: out event data port Data_Types::Temp.i;
+	end pradio;
+
+	process implementation pradio.i
+		subcomponents
+			radio: thread radio.i;
+		connections
+			c1: port radio.write_port -> write_port;
+		properties
+			CASE_Scheduling::Domain => 2;
+			Case_Properties::Comm_Driver => true;
+	end pradio.i;
+
+	thread Radio
+		features
+			write_port: out event data port Data_Types::Temp.i;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1 sec;
+	end Radio;
+
+	thread implementation Radio.i
+	end Radio.i;
+
+	----------------------------------------------------------------------------------------
+	process preceiver
+		features
+			read_port: in event data port Data_Types::Temp.i;
+	end preceiver;
+
+	process implementation preceiver.i
+		subcomponents
+			receiver: thread receiver.i;
+		connections
+			c1: port read_port -> receiver.read_port;
+		properties
+			CASE_Scheduling::Domain => 4;
+	end preceiver.i;
+
+	thread Receiver
+		features
+			read_port: in event data port Data_Types::Temp.i;
+		properties
+			Dispatch_Protocol => Sporadic;
+	end Receiver;
+
+	thread implementation Receiver.i
+	end Receiver.i;
+
+end AttestationGate;

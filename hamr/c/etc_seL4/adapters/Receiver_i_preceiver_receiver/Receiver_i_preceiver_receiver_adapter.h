@@ -1,0 +1,14 @@
+#ifndef RECEIVER_I_PRECEIVER_RECEIVER_ADAPTER_H
+#define RECEIVER_I_PRECEIVER_RECEIVER_ADAPTER_H
+
+#include <all.h>
+
+Unit t_AttestationGate_Receiver_i_preceiver_receiver_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit t_AttestationGate_Receiver_i_preceiver_receiver_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit t_AttestationGate_Receiver_i_preceiver_receiver_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints t_AttestationGate_Receiver_i_preceiver_receiver_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

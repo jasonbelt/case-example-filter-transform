@@ -1,0 +1,14 @@
+#ifndef RADIO_I_PRADIO_RADIO_ADAPTER_H
+#define RADIO_I_PRADIO_RADIO_ADAPTER_H
+
+#include <all.h>
+
+Unit t_AttestationGate_Radio_i_pradio_radio_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit t_AttestationGate_Radio_i_pradio_radio_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit t_AttestationGate_Radio_i_pradio_radio_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints t_AttestationGate_Radio_i_pradio_radio_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

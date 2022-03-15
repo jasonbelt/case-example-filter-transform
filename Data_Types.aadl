@@ -1,0 +1,17 @@
+package Data_Types
+public
+	with Base_Types;
+	with HAMR;
+
+	data Temp
+
+	end Temp;
+
+	data implementation Temp.i
+		subcomponents
+			value: data Base_Types::Integer_32;
+		properties
+			HAMR::Bit_Codec_Max_Size => 32 bytes;
+	end Temp.i;
+
+end Data_Types;

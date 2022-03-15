@@ -1,0 +1,9 @@
+package AGREE_Definitions
+public
+	with Data_Types;
+
+	annex agree {**
+		fun Good_Message(msg: Data_Types::Temp.i): bool = in_range(msg);
+		fun in_range(msg: Data_Types::Temp.i): bool = msg.value >= 70 and msg.value <= 100;
+	**};
+end AGREE_Definitions;
