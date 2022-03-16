@@ -25,8 +25,7 @@ Unit t_AttestationGate_Receiver_i_preceiver_receiver_handle_read_port_raw(
 
   size_t numBytes = numBits == 0 ? 0 : (numBits - 1) / 8 + 1;
 
-  //int32_t value = byteArray[0] << 24 | byteArray[1] << 16 | byteArray[2] << 8 | byteArray[3];
-  int32_t value = byteArray[3] << 24 | byteArray[2] << 16 | byteArray[1] << 8 | byteArray[0];
+  uint32_t value = byteArray[3] << 24 | byteArray[2] << 16 | byteArray[1] << 8 | byteArray[0];
   printf("[%s] Received %i\n", component_id, value);
   
   hex_dump(SF byteArray, numBytes);

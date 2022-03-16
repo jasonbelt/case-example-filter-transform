@@ -9,7 +9,7 @@ public
 
 	data implementation Temp.i
 		subcomponents
-			value: data Base_Types::Integer_32;
+			value: data Base_Types::Unsigned_32;
 		properties
 			HAMR::Bit_Codec_Max_Size => 32 bytes;
 	end Temp.i;

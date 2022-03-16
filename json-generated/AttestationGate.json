@@ -160,31 +160,6 @@
                 "value": 1,
                 "unit": "sec"
               }
-            },
-            {
-              "name": "CASE_Properties::Component_Language",
-              "kind": "PropertyAssociation",
-              "value": {
-                "kind": "EnumerationLiteral",
-                "value": "CakeML"
-              }
-            },
-            {
-              "name": "Programming_Properties::Source_Text",
-              "kind": "PropertyAssociation",
-              "value": {
-                "kind": "ListValue",
-                "value": [
-                  {
-                    "kind": "StringLiteral",
-                    "value": "Component_Source/AttestationGate_Filter/AttestationGate_Filter.S"
-                  },
-                  {
-                    "kind": "StringLiteral",
-                    "value": "Component_Source/AttestationGate_Filter/basis_ffi.c"
-                  }
-                ]
-              }
             }
           ]
         },
@@ -250,15 +225,15 @@
             {
               "name": "c1",
               "kind": "PortConnection",
-              "source": "Filter.Output",
-              "destination": "Output",
+              "source": "Input",
+              "destination": "Filter.Input",
               "bidirectional": false
             },
             {
               "name": "c2",
               "kind": "PortConnection",
-              "source": "Input",
-              "destination": "Filter.Input",
+              "source": "Filter.Output",
+              "destination": "Output",
               "bidirectional": false
             }
           ],
@@ -271,15 +246,6 @@
                 "value": 1,
                 "unit": "sec"
               }
-            },
-            {
-              "name": "CASE_Scheduling::Domain",
-              "kind": "PropertyAssociation",
-              "value": {
-                "kind": "IntegerLiteral",
-                "value": 3,
-                "unit": null
-              }
             }
           ],
           "annexes": [
@@ -288,7 +254,7 @@
               "kind": "AnnexSubclause",
               "parsedAnnexSubclause": {
                 "statements": [
-                  "new_case/genSpecStatement/com.rockwellcollins.atc.agree.agree.impl.LiftContractStatementImpl@7108bc8"
+                  "new_case/genSpecStatement/com.rockwellcollins.atc.agree.agree.impl.LiftContractStatementImpl@107f3322"
                 ]
               }
             }
@@ -363,8 +329,7 @@
               },
               "appliesTo": [
                 "pradio",
-                "preceiver",
-                "Filter"
+                "preceiver"
               ]
             },
             {
@@ -609,7 +574,7 @@
               "name": "value",
               "kind": "Subcomponent",
               "category": "data",
-              "classifier": "Base_Types::Integer_32"
+              "classifier": "Base_Types::Unsigned_32"
             }
           ],
           "properties": [

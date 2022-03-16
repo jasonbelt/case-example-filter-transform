@@ -299,12 +299,12 @@
       <connection xsi:type="aadl2:PortConnection" href="../AttestationGate.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.0"/>
     </connectionReference>
     <connectionReference context="//@componentInstance.2" source="//@componentInstance.2/@featureInstance.0" destination="//@componentInstance.2/@componentInstance.0/@featureInstance.0">
-      <connection xsi:type="aadl2:PortConnection" href="../AttestationGate.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPortConnection.1"/>
+      <connection xsi:type="aadl2:PortConnection" href="../AttestationGate.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPortConnection.0"/>
     </connectionReference>
   </connectionInstance>
   <connectionInstance name="Filter.Filter.Output -> preceiver.receiver.read_port" complete="true" kind="portConnection" destination="//@componentInstance.1/@componentInstance.0/@featureInstance.0" source="//@componentInstance.2/@componentInstance.0/@featureInstance.1">
     <connectionReference context="//@componentInstance.2" source="//@componentInstance.2/@componentInstance.0/@featureInstance.1" destination="//@componentInstance.2/@featureInstance.1">
-      <connection xsi:type="aadl2:PortConnection" href="../AttestationGate.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPortConnection.0"/>
+      <connection xsi:type="aadl2:PortConnection" href="../AttestationGate.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPortConnection.1"/>
     </connectionReference>
     <connectionReference context="/" source="//@componentInstance.2/@featureInstance.1" destination="//@componentInstance.1/@featureInstance.0">
       <connection xsi:type="aadl2:PortConnection" href="../AttestationGate.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPortConnection.1"/>

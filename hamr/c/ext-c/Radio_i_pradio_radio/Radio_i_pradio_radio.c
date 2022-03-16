@@ -6,7 +6,7 @@
 
 static char* component_id = "s_impl_Instance_pradio_radio";
 
-int32_t sent;
+uint32_t sent;
 
 Unit t_AttestationGate_Radio_i_pradio_radio_initialise_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "Radio_i_pradio_radio.c", "", "t_AttestationGate_Radio_i_pradio_radio_initialise_", 0);

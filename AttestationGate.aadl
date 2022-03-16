@@ -26,9 +26,9 @@ public
 	properties
 		Dispatch_Protocol => Periodic;
 		Period => 1 sec;
-
 		CASE_Properties::Component_Language => CakeML;
-		Source_Text => ("Component_Source/AttestationGate_Filter/AttestationGate_Filter.S",
+		Source_Text => (
+			"Component_Source/AttestationGate_Filter/AttestationGate_Filter.S",
 			"Component_Source/AttestationGate_Filter/basis_ffi.c");
 end Filter.Impl;
 
@@ -45,8 +45,8 @@ end Filter.Impl;
 		subcomponents
 			Filter: thread Filter.Impl;
 		connections
-			c1: port Filter.Output -> Output;
-			c2: port Input -> Filter.Input;
+			c1: port Input -> Filter.Input;
+			c2: port Filter.Output -> Output;
 		properties
 			Period => 1 sec;
 			CASE_Scheduling::Domain => 3;
@@ -64,11 +64,9 @@ end Filter.Impl;
 
 			pradio: process pradio.i;
 			preceiver: process preceiver.i;
-
 			Filter: process Filter_seL4.Impl;
 		connections
 			c1: port pradio.write_port -> Filter.Input;
-
 			c2: port Filter.Output -> preceiver.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to pradio, preceiver, Filter;
